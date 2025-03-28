@@ -1,1 +1,341 @@
 # resin_arte_6.github.io
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESIN-ARTE</title>
+    <link rel="stylesheet" href="Estilos.css">
+    <style>
+        #carrito-modal .cerrar-btn:hover {
+            background-color: #fc74c4;
+        }
+
+        /* Estilo general */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;/* Botones generales */
+        button {
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f45699; /* Rosa inicial */
+        }
+
+        button:hover {
+            background-color: #fc74c4; /* Rosa más claro */
+            transform: scale(1.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Botón del carrito */
+        .carrito-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+background-color: #333;
+        }
+
+        /* Botón para cerrar el carrito */
+        .cerrar-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Estilo de la ventana del carrito */
+        #carrito-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: none;
+            z-index: 1000;
+        }
+
+        #carrito-modal ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #carrito-modal li {
+            margin-bottom: 10px;
+        }
+
+            padding: 0;
+            background-color: #fae0f5;
+            color: #333;
+        }
+
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        header {
+            background-color: #f45699;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        /* Navegación */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #faf8fb;
+            padding: 15px 20px;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background-color: #fbcaeb;
+            transition: background-color 0.3s;
+        }
+
+        /* Galería */
+        .galeria img {
+            width: 30%;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .galeria img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Secciones generales */
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            background-color: #faf8fb;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #fc74c4;
+        }
+
+        /* Reseñas */
+        #reseñas {
+            font-style: italic;
+        }
+
+        /* Newsletter */
+        #newsletter input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #newsletter button {
+            padding: 10px;
+            background-color: #f45699;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #newsletter button:hover {
+            background-color: #f45699;
+        }
+
+        /* WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>¡Explora Nuestros Productos de Resina!</h1>
+        <button class="carrito-btn" onclick="mostrarCarrito()">🛒 Ver Carrito</button>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#productos">Productos</a></li>
+<li><a href="#promocion">Promociones</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#newsletter">Suscripción</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    <main>
+       <!-- Sección de productos -->
+        <section id="productos">
+            <h2>Nuestros Productos</h2>
+            <div class="productos">
+                <div class="producto">
+                    <img src="producto1.jpg" alt="Producto 1">
+                    <p>Producto 1 - $40</p>
+                    <button onclick="agregarAlCarrito('Producto 1', 40)">Añadir al Carrito</button>
+                </div>
+                <div class="producto">
+                    <img src="producto2.jpg" alt="Producto 2">
+                    <p>Producto 2 - $30</p>
+                    <button onclick="agregarAlCarrito('Producto 2', 30)">Añadir al Carrito</button>
+                </div>
+                <div class="producto">
+                    <img src="producto3.jpg" alt="Producto 3">
+                    <p>Producto 3 - $15</p>
+                    <button onclick="agregarAlCarrito('Producto 3', 15)">Añadir al Carrito</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Modal del carrito -->
+    <div id="carrito-modal">
+        <h2>Carrito</h2>
+        <ul id="lista-carrito"></ul>
+        <p><strong>Total:</strong> $<span id="total"></span></p>
+        <button class="cerrar-btn" onclick="cerrarCarrito()">Cerrar</button>
+    </div>
+<section id="promocion">
+    <h2>¡Aprovecha nuestra promoción especial!</h2>
+    <p>La oferta termina en:</p>
+    <div id="temporizador"></div>
+</section>
+<script>
+    const cuentaRegresiva = () => {
+        const fechaFin = new Date("2025-03-30T23:59:59").getTime();
+        const ahora = new Date().getTime();
+        const diferencia = fechaFin - ahora;
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById("temporizador").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+        if (diferencia < 0) {
+            document.getElementById("temporizador").innerHTML = "¡Promoción terminada!";
+        }
+    };
+
+    setInterval(cuentaRegresiva, 1000);
+</script>
+
+        <!-- Galería -->
+        <section id="galeria">
+            <h2>Galería de Productos</h2>
+            <div class="galeria">
+                <img src="producto1.jpg" alt="Producto 1">
+                <img src="producto2.jpg" alt="Producto 2">
+            </div>
+ </section>
+       
+        <!-- Suscripción -->
+        <section id="newsletter">
+            <h2>Suscríbete a nuestro boletín</h2>
+            <form action="suscribete.html" method="post">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirse</button>
+            </form>
+</section>
+
+       
+
+        <!-- Video -->
+        <section id="video">
+            <h2>Conoce nuestro proceso creativo</h2>
+            <video controls width="100%" style="border-radius: 8px;">
+                <source src="video.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </section>
+
+        <!-- Contacto -->
+<section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>¡Estamos aquí para ayudarte! Escríbenos en nuestro <a href="https://www.instagram.com/Resin_arte_6/" target="_blank" style="color: #f45699; text-decoration: none;">Instagram: @Resin_arte_6</a></p>
+</section>
+
+
+    </main>
+    <footer>
+        <p>© 2025 Resin-Arte. Todos los derechos reservados.</p>
+    </footer>
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/2711803162" target="_blank" class="whatsapp-btn">💬 Contáctanos por WhatsApp</a>
+    <script>
+        let carrito = [];
+
+        function agregarAlCarrito(producto, precio) {
+            carrito.push({ producto, precio });
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const listaCarrito = document.getElementById('lista-carrito');
+            listaCarrito.innerHTML = '';
+            carrito.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.producto} - $${item.precio} <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
+                listaCarrito.appendChild(li);
+            });
+
+            const total = document.getElementById('total');
+            total.textContent = calcularTotal();
+        }
+
+        function eliminarDelCarrito(indice) {
+            carrito.splice(indice, 1);
+            actualizarCarrito();
+        }
+
+        function calcularTotal() {
+            return carrito.reduce((total, item) => total + item.precio, 0).toFixed(2);
+        }
+
+        function mostrarCarrito() {
+            const carritoModal = document.getElementById('carrito-modal');
+            carritoModal.style.display = 'block';
+        }
+
+        function cerrarCarrito() {
+            const carritoModal = document.getElementById('carrito-modal');
+            carritoModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
